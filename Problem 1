@@ -1,0 +1,222 @@
+/* A program that let the instructor to input 50 student names and their respective scores for each grade component;
+output the students’ final raw grades and their corresponding Grade Point Average (GPA);
+and determine if a student passed or failed the subject and display the top 10 performing students in class. */
+
+#include <iostream> //supports input/output capabilities
+#include <string> //represents a sequence of characters
+#include <cmath> //declares a set of functions to perform mathematical functions
+
+using namespace std;
+
+
+int main()
+
+{
+	//string array variable declaration
+	//first and last name of the student
+    string fn[50]; 
+    string ln[50]; 
+    
+    //array variable declaration
+    //the following grade components: experiments, skills tests, machine problems, prelims and finals exam
+    int ex[9][50];
+    int skl[9][50];
+    int mp[2][50];
+    int prl[1][50];
+    int fin[1][50];
+    
+    //more than one variable declaration
+    //sum and percentage of grade components 
+    int sumex, sumskl, summp, summe, experc, sklperc, mpperc, prlperc, finperc, perctot, rawtot;
+    
+    //double variable declaration
+    //grade percentage
+    double grperc;
+    
+    //variable value initialization
+    sumex = 0;
+    sumskl = 0;
+    summp = 0;
+    summe = 0;
+    experc = 0;
+    sklperc = 0;
+    mpperc = 0;
+    finperc = 0;
+    perctot = 0;
+    
+    
+    //introduction of the program
+    cout << "\t\t\t\t\t\t\t\t Welcome to GRADEMASTER 3000! \n";
+    cout << "\n";
+    cout << "This program will let the user to input a maximum of 50 student names and their respective scores for each grade component. \n";
+    cout << "\n";
+    cout << "This program outputs the students’ final raw grades and their corresponding Grade Point Average (GPA). \n";
+    cout << "\n";
+    cout << "It will also determine if a student passed or failed the subject and will display the top 10 performing students in class. \n";
+    cout << "\n";
+    
+    
+    //looping statement for insertion of element in an array
+    for (int s = 0; s <= 50; s++)
+    {
+        cout << "\n";
+        cout << "Name of Student: " << endl;
+        cin >> fn[s] >> ln[s];
+        
+        //prompts user to enter scores for experiments
+        cout << "\n";
+        cout << "\n";
+        cout << "Enter the scores for Experiments." << endl;
+        cout << "\n";
+        
+        //loop for experiment
+        for (int a = 1; a <= 9; a++)
+        {
+            {
+                cout << "Experiment " << a << ": ";
+                cin >> ex[a][s]; //storing experiments' scores in an array
+                cout << "\n";
+            }
+            
+            //computation for raw score and percentage of experiments
+            sumex += ex[a][s];
+            experc = (sumex / 9) * .10;
+            
+            //prints computed raw score and percentage on screen
+            cout << "Raw Score: " << sumex << "\n";
+            cout << "Percentage: " << experc << "%" << "\n";
+            cout << "\n";
+        }
+        
+        //prompts user to enter scores for skills tests
+        cout << "\n";
+        cout << "\n";
+        cout << "Enter the scores for Skills Tests." << endl; 
+        cout << "\n";
+        
+        //loop for skills tests
+        for (int b = 1; b <= 9; b++)
+        {
+            {
+                cout << "Skills Test " << b << ": ";
+                cin >> skl[b][s]; //storing skills tests' scores in an array
+                cout << "\n";
+            }
+            
+            //computation for raw score and percentage of skills test
+            sumskl += skl[b][s];
+            sklperc = (sumskl / 9) * .20;
+            
+            //prints computed raw score and percentage on screen
+            cout << "Raw Score: " << sumskl << "\n";
+            cout << "Percentage: " << sklperc << "%" << "\n";
+            cout << "\n";
+        }
+        
+        //prompts user to enter scores for machine problems
+        cout << "\n";
+        cout << "\n";
+        cout << "Enter the scores for Machine Problems." << endl; 
+        cout << "\n";
+        
+    	//loop for machine problems
+        for (int c = 1; c <=2; c++)
+        {
+            {
+                cout << "Machine Problem " << c << ": ";
+                cin >> mp[c][s]; //storing machine problems' scores in an array
+                cout << "\n";
+            }
+            
+            //computation for raw score and percentage of machine problems
+            summp += mp[c][s];
+            mpperc = (summp / 2) * .20;
+            
+            //prints computed raw score and percentage on screen
+            cout << "Raw Score: " << summp << "\n";
+            cout << "Percentage: " << mpperc << "%" << "\n";
+            cout << "\n";
+        }
+        
+        //prompts the user to enter scores for major examinations
+        cout << "\n";
+        cout << "\n";
+        cout << "Enter the scores for Major Examinations." << endl;
+        cout << "\n";
+        
+        //loop for major examinations
+        for (int d = 1; d <=1; d++)
+        {
+            {
+                cout << "Preliminary" << ": ";
+                cin >> prl[d][s]; //storing preliminary exam score in an array
+                cout << "\n";
+                cout << "Finals" << ": ";
+                cin >> fin[d][s]; //storing final exam score in an array
+            }
+            
+            //computation for raw score and percentage of major exams
+            summe = prl[d][s] + fin[d][s];
+            prlperc = prl[d][s] * .20;
+            finperc = fin[d][s] * .30;
+            perctot = prlperc + finperc;
+            
+            //prints computed raw score and percentage on screen
+            cout << "Raw Score: " << summe << "\n";
+            cout << "Percentage: " << perctot << "%" << "\n";
+            cout << "\n";
+            
+            //computation for total raw score, final GPA, and the transmuted grade
+            grperc = experc + sklperc + mpperc + perctot;
+            rawtot = sumex + sumskl + summp + summe;
+            
+            //prints total raw score, final GPA, and transmuted grade on screen
+            cout << "Total Raw Score: " << rawtot << endl;
+            cout << "Final GPA: " << grperc << endl;
+            cout << "Transmuted Grade: ";
+            
+            //if-else statement for the final raw grade and corresponding GPA based on final grade trasmutation
+            if (grperc >= 95.57 && grperc <= 100)
+            {
+                cout << "1.0";
+            }
+            else if (grperc >= 91.12 && grperc <= 95.56)
+            {
+                cout << "1.25";
+            }
+            else if (grperc >= 86.68 && grperc <= 91.11)
+            {
+                cout << "1.5";
+            }
+            else if (grperc >= 82.23 && grperc <= 86.67)
+            {
+                cout << "1.75";
+            }
+            else if (grperc >= 77.79 && grperc <= 82.22)
+            {
+                cout << "2.0";
+            }
+            else if (grperc >= 73.34 && grperc <= 77.78)
+            {
+                cout << "2.25";
+            }
+            else if (grperc >= 68.90 && grperc <= 73.33)
+            {
+                cout << "2.5";
+            }
+            else if (grperc >= 64.45 && grperc <= 68.89)
+            {
+                cout << "2.75";
+            }
+            else
+                cout << "5.0";
+            
+            cout << "\n";
+            cout << "\n";
+        }
+      
+        
+    }
+    
+    return 0;
+}
