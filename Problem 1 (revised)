@@ -1,0 +1,169 @@
+//This is the revised version of Problem 1. We tried to correct the codes, even after passing it on blackboard.
+
+#include <iostream>
+#include <string>
+#include<iomanip>
+#include <cmath>
+using namespace std;
+int main()
+{
+    string fn[50],ln[50];
+    double ex[9],sumex[50],experc[50];
+    double skl[9],sumskl[50],sklperc[50];
+    double mp[2],summp[50],mpperc[50];
+    double prl[1],prlperc[50];
+    double fin[1],finperc[50],summe[50];
+    double grperc[50],rawtot[50],perctot[50];
+    int tname,tgwa;
+
+    cout << "\t\t\tWelcome to GRADEMASTER 3000... \n";
+    cout << "This program will let the user to input ";
+    cout << "a maximum of  50 student names and their respective ";
+    cout << "scores for each grade component. ";
+    cout << "This program also outputs the studentsâ€™ ";
+    cout << "final raw grades and their corresponding Grade Point Average (GPA). ";
+    cout << "It will also determine if a student passed or failed the subject ";
+    cout << "and will display the top 10 performing students in class. \n";
+    
+    
+    for (int s = 1; s <= 50; s++)
+    {
+        cout << "\n";
+        cout << "Enter student name ["<<s<<"]:"<<endl;
+        cin >> fn[s]>>ln[s];
+        
+        cout << "Please enter the score for Experiment." << endl;
+        for (int a = 1; a <= 9; a++)
+        {
+            cout << "\tExperiment " << a << " : ";
+            cin >> ex[a];
+            sumex[s] += ex[a];
+            experc[s] = (sumex[s] / 9) * .10;
+        }
+        cout << "Please enter the score for Skills Test." << endl;
+        for (int b = 1; b <= 9; b++)
+        {
+            cout << "\tSkills test " << b << " : ";
+            cin >> skl[b];
+            sumskl[s] += skl[b];
+            sklperc[s] = (sumskl[s] / 9) * .20;
+        }
+            
+        cout << "Please enter the score for Machine Problems." << endl;
+        for (int c = 1; c <=2; c++)
+        {
+            cout << "\tMachine Problem " << c << " : ";
+            cin >> mp[c];
+            summp[s] += mp[c];
+            mpperc[s] = (summp[s] / 2) * .20;
+        }
+        
+        cout << "Please enter the score for Major Exams." << endl;
+
+        cout << "\tPrelims" << " : ";
+        cin >> prl[s];
+        cout << "\tFinals" << " : ";
+        cin >> fin[s];
+    
+            prlperc[s] = prl[s] * .20;
+            finperc[s] = fin[s] * .30;
+            perctot[s] = prlperc[s] + finperc[s];
+            
+            //output
+            cout<<"\nBreakdown of your grades: \n";
+            cout << "For Experiments: \n";
+            cout << "\tRaw score: " <<setw(5)<<fixed<<setprecision(2)<< sumex[s] << "\n";
+            cout << "\tPercentage: " <<setw(5)<<fixed<<setprecision(2)<< experc[s] << "%" << "\n";
+            cout << "For Skill Tests: \n";
+            cout << "\tRaw score: " <<setw(5)<<fixed<<setprecision(2)<< sumskl[s] << "\n";
+            cout << "\tPercentage: " <<setw(5)<<fixed<<setprecision(2)<< sklperc[s] << "%" << "\n";
+            cout << "For Machine Problems: \n";
+            cout << "\tRaw score: " <<setw(5)<<fixed<<setprecision(2)<< summp[s] << "\n";
+            cout << "\tPercentage: " <<setw(5)<<fixed<<setprecision(2)<< mpperc[s] << "%" << "\n";
+            cout << "For Exams: \n";
+            cout << "\tRaw score: " <<setw(5)<<fixed<<setprecision(2)<< prl[s]+fin[s] << "\n";
+            cout << "\tPercentage: " <<setw(5)<<fixed<<setprecision(2)<< perctot[s] << "%" << "\n";
+
+            
+            grperc[s] = experc[s] + sklperc[s] + mpperc[s] + perctot[s];
+            rawtot[s] = sumex[s] + sumskl[s] + summp[s] + summe[s];
+            
+            cout<<"General Weighted Average: ";
+            if (grperc[s] >= 95.57 && grperc[s] <= 100)
+            {
+                cout << "1.0";
+            }
+            else if (grperc[s] >= 91.12 && grperc[s] <= 95.56)
+            {
+                cout << "1.25";
+            }
+            else if (grperc[s] >= 86.68 && grperc[s] <= 91.11)
+            {
+                cout << "1.5";
+            }
+            else if (grperc[s] >= 82.23 && grperc[s] <= 86.67)
+            {
+                cout << "1.75";
+            }
+            else if (grperc[s] >= 77.79 && grperc[s] <= 82.22)
+            {
+                cout << "2.0";
+            }
+            else if (grperc[s] >= 73.34 && grperc[s] <= 77.78)
+            {
+                cout << "2.25";
+            }
+            else if (grperc[s] >= 68.90 && grperc[s] <= 73.33)
+            {
+                cout << "2.5";
+            }
+            else if (grperc[s] >= 64.45 && grperc[s] <= 68.89)
+            {
+                cout << "2.75";
+            }
+            else if (grperc[s] >= 60.00 && grperc[s] <= 64.44)
+            {
+                cout << "3.0";
+            }
+            else
+                cout << "5.0";
+            cout<<"\tRemarks: ";
+            if (grperc[s] >= 60.00 && grperc[s] <= 100)
+            {
+                cout << "PASSED";
+            }
+            else
+            {
+                cout << "FAILED";
+            }
+            cout<<endl;
+    }
+        
+    
+    //sorting
+    for(int i=0;i<50;i++) 
+	{
+		for(int j=i+1;j<50;j++)
+		{
+			if(grperc[i]<grperc[j])
+			{
+				tgwa = grperc[i];
+				grperc[i] = grperc[j];
+				grperc[j] = tgwa;
+				
+				tname = fn[i][50];
+				fn[i][50] = fn[j][50];
+				fn[j][50] = tname;
+			} 
+		}
+	
+	}
+	
+	cout<<"\nTop performing students: "<< endl; 
+	for(int i=0;i<10;i++)	
+	{
+		cout<<"Top "<<i+1<<": "<<ln[i+1]<<", "<<fn[i+1]<<endl; 
+	}
+
+    return 0;
+}
