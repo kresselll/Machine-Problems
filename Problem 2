@@ -1,0 +1,113 @@
+/* A program that would compute the all interior angles; classify whether scalene, isosceles, or equilateral;
+determine the area and perimeter; classify whether acute triangle, right triangle, or obtuse triangle;
+and compute for length of apothem and circumcenter based on the given sides of the triangle. */
+
+#include <iostream> //supports input/output capabilities
+#include <cmath> //declares a set of functions to perform mathematical functions
+
+using namespace std;
+
+int main()
+{
+	//double variable declaration
+    double a, b, c, p, h, ha, pi, aptm, cctr;
+    
+    //integer variable declaration
+    int angleA, angleB, angleC;
+    
+    //variable value initialization 
+    pi = 3.1415926;
+    
+    //prompts the user to enter the measurements of the sides of the triangle
+    cout << "Please enter the measurement of the first side of your triangle: ";
+    cin >> a; 	//assigns input value to variable a 
+    
+    cout << "\n";
+    
+    cout << "Please enter the measurement of the second side of your triangle: ";
+    cin >> b; 	//assigns input value to variable b
+    
+    cout << "\n";
+    
+    cout << "Please enter the measurement of the third side of your triangle: ";
+    cin >> c; 	//assigns input value to variable c
+    
+    cctr = (a * sqrt(3)) / 3;		//computation for circumcenter
+    aptm = (a / 2) * sqrt(3);		//computation for apothem
+    p = a + b + c;		//computation for perimeter
+    h = (a + b + c) / 2;		//computation for Heron's formula 
+    ha = sqrt ( h * (h - a) * (h - b) * (h - c));		//computation for area
+    angleA = acos (((b * b) + (c * c) - (a * a)) / (2 * b * c)) * 180 / pi;		//computation for interior angle of vertex a
+    angleB = acos (((a * a) + (c * c) - (b * b)) / (2 * a * c)) * 180 / pi;		//computation for interior angle of vertex b
+    angleC = acos (((a * a) + (b * b) - (c * c)) / (2 * a * b)) * 180 / pi;		//computation for interior angle of vertex c
+    
+    cout << "\n";
+    
+    cout << "Computing for the internal angles..." << endl;
+   
+    cout << "The interior angle of vertex a is: " << angleA << endl;
+    
+    cout << "The interior angle of vertex b is: " << angleB << endl;
+    
+    cout << "The interior angle of vertex c is: " << angleC << endl;
+    
+    cout << "\n";
+    
+    
+    cout << "Classifying triangle according to its sides... " << "we have: ";
+    
+    //if-else statements for classifying whether scalene, isosceles, or equilateral
+    if (a == b && b == c && a == c)
+       cout << "a triangle that is equilateral" << endl;
+    
+    else if ( a == b && a != c && b != c)
+        cout << "a triangle that is isoceles" << endl;
+    
+    else if (a != b && b != c && a != c)
+        cout << "a triangle that is scalene" << endl;
+        cout << "\n";
+    
+    cout << "Computing for the perimeter... ";
+    cout << "The perimeter is: " << p << endl;
+    cout << "\n";
+    
+    cout << "Computing for the area... ";
+    cout << "The area is: " << ha << endl;
+    cout << "\n";
+    
+    cout << "Classifying triangle according to its interior angles... " << "we have: ";
+   
+   //if-else statements for classifying whether acute triangle, right triangle, or obtuse triangle
+    if (angleA == 90 && angleB == 90 && angleC == 90)
+        {
+            cout << "a right triangle" << endl;
+        }
+    
+    
+    else if (angleA < 90 && angleB < 90 && angleC < 90)
+        {
+            cout << "an acute triangle" << endl;
+        }
+    
+    else if (angleA > 90 && angleB > 90 && angleC > 90)
+        {
+            cout << "an obtuse triangle" << endl;
+        }
+    
+        cout << "\n";
+    
+    //prints out the results of the computations on screen
+    if (a == b && b == c && a == c)
+        cout << "we have an equilateral triangle, therefore: ";
+        cout << "We both have a circumcenter and an apothem." << endl;
+        cout << "\n";
+    
+        cout << "Computing for the apothem: ";
+        cout << "The apothem is: " << aptm << endl;
+        cout << "\n";
+    
+        cout << "Computing for the circumcenter: ";
+        cout << "The circumcenter is: " << cctr << endl;
+    
+    return 0;
+}
